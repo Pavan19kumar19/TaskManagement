@@ -54,7 +54,9 @@ const FetchTasks = () => {
 
       await set(taskRef, newTask);
 
-      alert(editTaskId ? "Task updated successfully!" : "Task added successfully!");
+      alert(
+        editTaskId ? "Task updated successfully!" : "Task added successfully!"
+      );
       setEditTaskId(null);
       setNewTask({ title: "", description: "", completed: false });
     } catch (error) {
@@ -99,101 +101,114 @@ const FetchTasks = () => {
 
   return (
     <>
-    <div className="task-container">
-      <h1>Task Manager</h1>
+      <div className="task-container">
+        <h1>Task Manager</h1>
 
-      <form className="task-form" onSubmit={handleAddTask}>
-        <h2>{editTaskId ? "Edit Task" : "Add New Task"}</h2>
-        <div className="form-group">
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={newTask.title}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={newTask.description}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="completed">Completed:</label>
-          <input
-            type="checkbox"
-            id="completed"
-            name="completed"
-            checked={newTask.completed}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit" className="submit-button">
-          {editTaskId ? "Update Task" : "Add Task"}
-        </button>
-      </form>
+        <form className="task-form" onSubmit={handleAddTask}>
+          <h2>{editTaskId ? "Edit Task" : "Add New Task"}</h2>
+          <div className="form-group">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={newTask.title}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              value={newTask.description}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="completed">Completed:</label>
+            <input
+              type="checkbox"
+              id="completed"
+              name="completed"
+              checked={newTask.completed}
+              onChange={handleInputChange}
+            />
+          </div>
+          <button type="submit" className="submit-button">
+            {editTaskId ? "Update Task" : "Add Task"}
+          </button>
+        </form>
 
-      <div className="tasks-section">
-        <div className="task-list">
-          <h2>Not Completed Tasks</h2>
-          <ul>
-            {notCompletedTasks.map((task) => (
-              <li key={task.id} className="task-item">
-                <div className="task-header">
-                  <h3>{task.title}</h3>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => toggleTaskCompletion(task)}
-                  />
-                </div>
-                <p>{task.description}</p>
-                <p className="task-id">ID: {task.id}</p>
-                <button onClick={() => handleEditTask(task)} className="edit-button">
-                  Edit
-                </button>
-                <button onClick={() => handleDeleteTask(task.id)} className="delete-button">
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="tasks-section">
+          <div className="task-list">
+            <h2>Not Completed Tasks</h2>
+            <ul>
+              {notCompletedTasks.map((task) => (
+                <li key={task.id} className="task-item">
+                  <div className="task-header">
+                    <p className="task-id">ID: {task.id}</p>
+                    <h3>{task.title}</h3>
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleTaskCompletion(task)}
+                    />
+                  </div>
+                  <p>{task.description}</p>
 
-        <div className="task-list completed-tasks">
-          <h2>Completed Tasks</h2>
-          <ul>
-            {completedTasks.map((task) => (
-              <li key={task.id} className="task-item completed">
-                <div className="task-header">
-                  <h3>{task.title}</h3>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => toggleTaskCompletion(task)}
-                  />
-                </div>
-                <p>{task.description}</p>
-                <p className="task-id">ID: {task.id}</p>
-                <button onClick={() => handleEditTask(task)} className="edit-button">
-                  Edit
-                </button>
-                <button onClick={() => handleDeleteTask(task.id)} className="delete-button">
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
+                  <button
+                    onClick={() => handleEditTask(task)}
+                    className="edit-button"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteTask(task.id)}
+                    className="delete-button"
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="task-list completed-tasks">
+            <h2>Completed Tasks</h2>
+            <ul>
+              {completedTasks.map((task) => (
+                <li key={task.id} className="task-item completed">
+                  <div className="task-header">
+                    <p className="task-id">ID: {task.id}</p>
+                    <h3>{task.title}</h3>
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleTaskCompletion(task)}
+                    />
+                  </div>
+                  <p>{task.description}</p>
+                  <button
+                    onClick={() => handleEditTask(task)}
+                    className="edit-button"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteTask(task.id)}
+                    className="delete-button"
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
